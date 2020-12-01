@@ -1,0 +1,28 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Hello vue</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{ message }}</h1>
+            <input v-model="message">
+
+            <h2>Hello {{ username }}!</h2>
+
+            <input v-model="username" placeholder="enter your name">
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+        var data = {
+            message: 'Greetings your majesty!',
+            username: '',
+        };
+
+        new Vue({
+            el: '#app',
+            data: data,
+        })
+    </script>
+</html>
