@@ -1,0 +1,39 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Hello vue</title>
+    </head>
+    <body>
+        <div id="app" >
+            <div class="container">
+                <div v-if="gender == 'male' || gender == 'female'">
+                    <h1 > Hello,
+                        <span v-show="gender == 'male'">Mister {{ name }}!</span>
+                        <span v-if="gender == 'female'"> Miss {{ name }}!</span>
+                    </h1>
+                </div>
+
+                <h1 v-else>Please decide your gender</h1>
+                
+                <label for="gender">Enter your gender:</label>
+                <input type="text" v-model="gender" id="gender" placeholder="sex" class="form-control">
+
+                <label for="name">Enter your name:</label>
+                <input type="text" v-model="name" id="name" placeholder="Ramadan" class="form-control">
+            </div>
+        </div>
+        
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                gender: '',
+                name: '',
+            },
+        })
+    </script>
+</html>
