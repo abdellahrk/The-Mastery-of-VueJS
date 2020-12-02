@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>List Rendering | V-for</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Let's hear some famou stories</h1>
+            <ul class="list-group">
+                <li v-for="(index, story) in stories | famous" class="list-group-item">
+                    {{ index }}. {{ story.writer }} said "{{ story.plot }}" and upvoted
+                    {{ story.upvotes }} times
+                </li>
+            </ul>
+            <br>
+            <button @click="order = order * -1" class="btn btn-primary">Reverse Order</button>
+            <pre>
+                {{ $data | json }}
+            </pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+        Vue.filter('famous', function(stories){
+            return stories.filter(function(item){
+                return item.upvotes > 20;
+            });
+        });
+        new Vue({
+            el: '.container',
+            data: {
+                order: -1,
+                stories: [
+                    {
+                        plot: 'I crashed my car today!',
+                        writer: 'Unknown',
+                        upvotes: 28
+                    },
+                    {
+                        plot: 'Yesterday, someone stole my bag!',
+                        writer: 'Zola',
+                        upvotes: 8
+                    },
+                    {
+                        plot: 'Someone ate my chocolate',
+                        writer: 'Estelle',
+                        upvotes: 50
+                    },
+                    {
+                        plot: 'I am so opsessed with computers',
+                        writer: 'Ramadan',
+                        upvotes: 89
+                    },
+                    {
+                        plot: 'My dream is to build products for the world',
+                        writer: 'Ramadan',
+                        upvotes: 11
+                    }
+                ],
+            },
+        });
+    </script>
+</html>

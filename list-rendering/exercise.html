@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>List Rendering | V-for</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Persons according to age</h1>
+            <ul class="list-group">
+                <li v-for="(index, person) in persons | orderBy 'age' order" class="list-group-item">
+                    {{ index }}. {{ person.name }} is
+                    {{ person.age }} 
+                </li>
+            </ul>
+            <br>
+            <button @click="order = order * -1" class="btn btn-primary">Reverse Order</button>
+
+            <h1>Persons older than 55</h1>
+            <ul class="list-group">
+                <li v-for="(index, person) in persons | olderAge" class="list-group-item">
+                    {{ index }}. {{ person.name }} is
+                    {{ person.age }} 
+                </li>
+            </ul>
+            <br>
+
+            <pre>
+                {{ $data | json }}
+            </pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+        
+        Vue.filter('olderAge', function(persons){
+            return persons.filter(function(item){
+                return item.age >= 55;
+            });
+        });
+        new Vue({
+            el: '.container',
+            data: {
+                order: 1,
+                persons: [
+                    {
+                        name: 'Amida',
+                        age: 18
+                    },
+                    {
+                        name: 'Zola',
+                        age: 27
+                    },
+                    {
+                        name: 'Nabil',
+                        age: 5
+                    },
+                    {
+                        name: 'Harun',
+                        age: 45
+                    },
+                    {
+                        name: 'Youssouf',
+                        age: 9
+                    },
+                    {
+                        name: 'Mohammed',
+                        age: 18
+                    },
+                    {
+                        name: 'Doudou',
+                        age: 32
+                    },
+                    {
+                        name: 'someone',
+                        age: 75
+                    },
+                    {
+                        name: 'Father',
+                        age: 69
+                    },
+                    {
+                        name: 'Mother',
+                        age: 55
+                    },
+                   
+                ],
+            },
+        });
+    </script>
+</html>
