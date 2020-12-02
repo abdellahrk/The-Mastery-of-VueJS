@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>List Rendering | V-for</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Let's hear some stories</h1>
+            <ul class="list-group">
+                <li v-for=" (key, story) in story" class="list-group-item">
+                    {{ $index }}: {{ key }} : {{ story }}
+                </li>
+            </ul>
+            <pre>
+                {{ $data | json }}
+            </pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '.container',
+            data: {
+                story: {
+                    plot: 'I am opsessed with computers',
+                    writer: 'Ramadan',
+                    upvotes: 50
+                }
+            },
+        });
+    </script>
+</html>

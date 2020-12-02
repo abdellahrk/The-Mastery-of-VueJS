@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>List Rendering | V-for</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Let's hear some stories</h1>
+            <ul class="list-group">
+                <li v-for="(index, story) in stories" class="list-group-item">
+                    {{ index }}. {{ story.writer }} said "{{ story.plot }}"
+                </li>
+            </ul>
+            <h3>Ramadan's Story</h3>
+            <ul class="list-group">
+                <li v-for="story in stories | filterBy 'Ramadan' in 'writer'" class="list-group-item">
+                    {{ story.writer }} said "{{ story.plot }}"
+                </li>
+            </ul>
+            <h3>Zola's Story</h3>
+            <ul class="list-group">
+                <li v-for="story in stories | filterBy 'Zola' in 'writer'" class="list-group-item">
+                    {{ story.writer }} said "{{ story.plot }}"
+                </li>
+            </ul>
+
+            <div class="form-group">
+                <label for="query">What are you looking for?</label>
+                <input v-model="query" class="form-control">
+            </div>
+
+            <h3>Search results:</h3>
+            <ul class="list-group">
+                <li v-for="story in stories | filterBy query in 'plot'"  class="list-group-item">
+                    {{ story.writer }} said "{{ story.plot }}"
+                </li>
+            </ul>
+            <pre>
+                {{ $data | json }}
+            </pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '.container',
+            data: {
+                stories: [
+                    {
+                        plot: 'I crashed my car today!',
+                        writer: 'Unknown'
+                    },
+                    {
+                        plot: 'Yesterday, someone stole my bag!',
+                        writer: 'Zola'
+                    },
+                    {
+                        plot: 'Someone ate my chocolate',
+                        writer: 'Estelle'
+                    },
+                    {
+                        plot: 'I am so opsessed with computers',
+                        writer: 'Ramadan',
+                    },
+                    {
+                        plot: 'My dream is to build products for the world',
+                        writer: 'Ramadan'
+                    }
+                ],
+            },
+        });
+    </script>
+</html>
