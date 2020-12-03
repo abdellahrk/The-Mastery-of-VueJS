@@ -1,0 +1,36 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Computed Properties</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="m5">Computed Properties</h1>
+            a = {{ a }}, b = {{ b }}
+
+            <input v-model="a" number class="form-control">
+
+            <pre>
+                {{ $data | json }}
+            </pre>
+        </div>
+        
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+
+        new Vue({
+            el: '.container',
+            data: {
+                a: 1
+            },
+            computed: {
+                b: function() {
+                    return parseInt(this.a) + 1
+                }
+            },
+        })
+
+    </script>
+</html>

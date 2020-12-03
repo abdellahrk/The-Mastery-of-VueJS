@@ -1,0 +1,24 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Interactivity</title>
+    </head>
+    <body>
+        <div class="container">
+            <button class="btn btn-primary" v-on:click="upvotes++">
+                Upvote! {{ upvotes }}
+            </button>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+
+        new Vue({
+            el: '.container',
+            data: {
+                upvotes: 0
+            }
+        })
+    </script>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Exercise | Candidates votes and Mayor</title>
+    </head>
+
+    <body >
+        <div class="container" @keyup.c="clear">
+            <h1>Vote for your Mayor </h1> 
+            <ul class="list-group mb-5">
+                <li v-for="(index, candidate) in candidates" class="list-group-item">
+                    {{ index }}. {{ candidate.name }} {{ candidate.votes }} <button @click="vote(candidate)" class="btn">Vote</button>
+                </li>
+                <h2 class="mt-3 mb-3">The Mayor candidate is {{ mayor.name }}</h2>
+            </ul >
+            <span class="text-small mb-3">click 'c' to reset the votes</span>
+            <br>
+            <pre>
+                {{ $data | json }}
+            </pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+     
+        new Vue({
+            el: '.container',
+            data: {
+                candidates: [
+                    {
+                        name: 'Abdellah',
+                        votes: 0
+                    },
+                    {
+                        name: 'Amida',
+                        votes: 0
+                    },
+                    {
+                        name: 'Zola',
+                        votes: 0
+                    },
+                    {
+                        name: 'Mother',
+                        votes: 0
+                    },
+                    {
+                        name: 'HaRUN',
+                        votes: 0
+                    },
+                    {
+                        name: 'Houdi',
+                        votes: 0
+                    },
+                    {
+                        name: 'Doudou',
+                        votes: 0
+                    },
+                    {
+                        name: 'Youssouf',
+                        votes: 0
+                    },
+                    {
+                        name: 'Oumar',
+                        votes: 0
+                    },
+                ],
+            },
+
+            computed: {
+                mayor: function() {
+                    mayorCandidate = this.candidates.sort((a, b) => {
+                        return b.votes - a.votes
+                    })
+                    return mayorCandidate[0];
+                }
+            },
+
+            methods: {
+                clear: function() {
+                    console.log('c clicked')
+                    this.candidates = this.candidates.map((candidate) => {
+                        candidate.votes = 0
+                        return candidate
+                    })
+                },
+                vote(candidate) {
+                    candidate.votes += 1
+                }
+            },
+        });
+    </script>
+</html>
