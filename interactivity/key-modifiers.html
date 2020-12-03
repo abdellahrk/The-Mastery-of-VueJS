@@ -1,0 +1,63 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Key modifiers</title>
+    </head>
+    <body>
+        <div class="container">
+           <h1>Type 2 numbers and choose operation.</h1>
+           <form class="form-inline" @submit.prevent="calculate">
+               <input v-model="a" @keyup.enter="calculate" number class="form-control">
+               <select v-model="operator" id="">
+                   <option selected>+</option>
+                   <option >-</option>
+                   <option >*</option>
+                   <option >/</option>
+               </select>
+               <input v-model="b" @keyup.enter="calculate" number class="form-control">
+               <button type="submit" class="btn btn-primary" >
+                   Calculate
+               </button>
+           </form>
+           <h2 v-show="operator">Result: {{ a }} {{ operator }} {{ b }} = {{ c }}</h2>
+
+           <pre>
+               {{ $data | json }}
+           </pre>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+
+        new Vue({
+            el: '.container',
+            data: {
+                a: 1,
+                b: 2, 
+                c: null, 
+                operator: null,
+            },
+
+            methods: {
+                calculate: function() {
+
+                    switch(this.operator) {
+                        case "+":
+                            this.c = parseInt(this.a)  + this.b
+                            break;
+                        case "-":
+                            this.c = this.a - this.b
+                            break
+                        case "*":
+                            this.c = this.a * this.b 
+                            break
+                        case "/":
+                            this.c = this.a / this.b
+                            break
+                    }
+                }
+            },
+        })
+    </script>
+</html>
