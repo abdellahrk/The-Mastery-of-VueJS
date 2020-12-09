@@ -1,0 +1,29 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Components</title>
+    </head>
+    <body>
+        <div class="container">
+            <story></story>
+            <story></story>
+            <story></story>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+
+        Vue.component('story', {
+            template: '<h1>My horse is amazing!</h1>'
+        })
+
+        new Vue({
+            el: '.container',
+            data: {
+
+            },
+            
+        })
+    </script>
+</html>

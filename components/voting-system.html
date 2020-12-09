@@ -1,0 +1,114 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Voting System</title>
+    </head>
+    <body>
+        <div id="app">
+            <div class="container">
+                <h1>Let's hear some stories!</h1>
+                <ul class="list-group">
+                    <story
+                        v-for="story in stories" 
+                        :story="story"
+                        :favorite.sync ="favorite">
+                    </story>
+                </ul>
+                <pre>
+                    {{ $data | json }}
+                </pre>
+            </div>
+        </div>
+        <template id="story-template" >
+            <li class="list-group-item">
+                {{ story.writer }} said "{{ story.plot }}"
+                Story upvotes {{ story.upvotes }}
+                <button 
+                    v-show="!story.voted" 
+                    @click="upvote"
+                    class="btn btn-default"
+                    >Upvote
+                </button>
+
+                <button
+                    v-show="!isFavorite"
+                    class="btn btn-primary"
+                    @click="setFavorite">
+                    Favorite
+                </button>
+
+                <span
+                    v-show="isFavorite"
+                    class="glyphicon glyphicon-star pull-right"
+                    aria-hidden="true">
+                    Favorite
+                </span>
+            </li>
+        </template>
+        
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+
+        Vue.component('story', {
+            template: '#story-template',
+            props: ['story', 'favorite'],
+            methods: {
+                upvote: function() {
+                    this.story.upvotes += 1
+                    this.story.voted = true
+                },
+                setFavorite: function(story) {
+                    this.$emit('update:favorite', this.story)
+                },
+                
+            },
+            computed: {
+                isFavorite: function() {
+                    return this.story == this.favorite;
+                }
+            },
+        })
+
+        new Vue({
+            el: '.container',
+            data: {
+                stories: [
+                    {
+                        plot: 'I crashed my car today!',
+                        writer: 'Ramadan',
+                        upvotes: 34,
+                        voted: false
+                    },
+                    {
+                        plot: 'Yesterday, someone stole my bag!',
+                        writer: 'Zola',
+                        upvotes: 54,
+                        voted: false
+                    },
+                    {
+                        plot: 'Someone ate my chocolate',
+                        writer: 'Estelle',
+                        upvotes: 34,
+                        voted: false
+                    },
+                    {
+                        plot: 'I am so opsessed with computers',
+                        writer: 'Ramadan',
+                        upvotes: 50,
+                        voted: false
+                    },
+                    {
+                        plot: 'My dream is to build products for the world',
+                        writer: 'Ramadan',
+                        upvotes: 10,
+                        voted: false
+                    }
+                ],
+                favorite: {},
+            },
+            
+        })
+    </script>
+</html>
