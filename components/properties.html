@@ -1,0 +1,38 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <title>Properties</title>
+    </head>
+    <body>
+        <div class="container">
+            <story v-bind:story="{plot: 'My horse is amazing.',  writer: 'Ramadan'}" ></story>
+
+            <template id="story-template">
+                <h1>{{ story.writer }} said {{ story.plot }}</h1>
+            </template>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    
+    <!---
+    <script type="text/template" id="story-template">
+        <h1>My horse is amazing!</h1>
+    </script>
+    -->
+    <script type="text/javascript">
+
+        Vue.component('story', {
+            props: ['story'],
+            template: '#story-template'
+        })
+
+        new Vue({
+            el: '.container',
+            data: {
+
+            },
+            
+        })
+    </script>
+</html>
