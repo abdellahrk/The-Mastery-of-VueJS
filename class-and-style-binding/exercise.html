@@ -1,0 +1,43 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Exercise</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body :style="styleObject">
+        <div class="container">
+            <h1>Choose a color to paint the background</h1>
+            <input type="color" v-model="styleObject.backgroundColor"/>
+            <input type="text" :value="styleObject.backgroundColor" v-model="styleObject.backgroundColor">
+        </div>
+        
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script>
+
+        new Vue({
+            el: 'body',
+            data: {
+              hexColor: '',
+              styleObject: {
+                  backgroundColor: "#4e5500"
+              }
+            },
+
+            methods: {
+                setColor: function() {
+
+                }
+            },
+
+            updated: {
+                logColor: function() {
+                    console.log(this.color)
+                }
+            }
+        })
+    </script>
+    <style type="text/css">
+        
+    </style>
+</html>
