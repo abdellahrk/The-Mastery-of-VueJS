@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="12345">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Stories API</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Let's hear some stories</h1>
+            <table class="table table-striped">
+
+                <story v-for="story in stories" is="story" :story="story"></story>
+            </table>
+            <p class="lead">Here's a list of all your stories</p>
+        </div>
+    </div>
+
+    <template id="story-template" >
+        <tr>
+            <td>{{ story.id }}</td>
+            <td>
+                <span>{{ story.plot }}</span>
+            </td>
+            <td>
+                <span>{{ story.writer }}</span>
+            </td>
+            <td>
+                <span>{{ story.upvotes }}</span>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <div @click="upvoteStory(story)" class="btn btn-primary">
+                        Upvote
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+    </template>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+
+    Vue.component('story', {
+        template: '#story-template',
+        props: ['story'],
+        methods: {
+            upvoteStory: function(story) {
+                //this.$http.patch('stories/'+story.id, story)
+                story.upvotes++;
+                jQuery.ajax({
+                    url: '/stories/'+story.id,
+                    type: 'PATCH',
+                    data: story,
+                });
+            }
+        }
+    })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                stories: []
+            },
+
+            mounted: function() {
+                jQuery.get('/stories', function(data) {
+                    vm.stories = data;
+                })
+            },
+        })
+    </script>
+</body>
+</html>
